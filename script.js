@@ -66,7 +66,7 @@ inquirer
  - [Questions](#questions)
 
 ## Description
-${badge}
+${badge}\n
 ${response.description}
 
 
@@ -101,7 +101,7 @@ function pickBadge(response) {
       "[![GitHub license](https://badgen.net/github/license/Naereen/Strapdown.js)](https://github.com/Naereen/StrapDown.js/blob/master/LICENSE)";
   } else if (response.license === "Apache") {
     badge =
-      "[![Npm package license](https://badgen.net/npm/llicense/discord.js)](https://npmjs.com/package/discord.js)";
+      "[![Npm package license](https://badgen.net/npm/license/discord.js)](https://npmjs.com/package/discord.js)";
   } else {
     badge =
       "[![GPL license](https://img.shields.io/badge/License-GPL-blue.svg)](http://perso.crans.org/besson/LICENSE.html)";
