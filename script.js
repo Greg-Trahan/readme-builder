@@ -1,18 +1,6 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
 
-// # Title
-// ## Description
-// ##Table of Contents
-// ##Installation
-// ##Usage
-// ##Credits----
-// ##License
-// ##Badges
-// ##Features
-// ##How to Contribute
-// ##Tests
-
 inquirer
   .prompt([
     {
@@ -64,20 +52,23 @@ inquirer
   ])
 
   .then((response) => {
+    badge = pickBadge(response);
+
     const finalString = `
 # ${response.title}
 
-## Table of Contents
- - [Description](#description)
- - [Installation](#installation)
- - [Contributions](#contributions)
- - [Tests](#tests)
- - [License](#license)
+## Table of Contents\n
+ - [Description](#description)\n
+ - [Installation](#installation)\n
+ - [Contributions](#contributions)\n
+ - [Tests](#tests)\n
+ - [License](#license)\n
  - [Questions](#questions)
 
 ## Description
+${badge}
 ${response.description}
-${response.badges}
+
 
 ## Installation
 ${response.installation}
@@ -97,10 +88,23 @@ The owner of this repo has licensed it under a ${response.license} license.
 ## Questions
 GitHub Profile: https://github.com/${response.github}
 If you have further questions you can reach me at ${response.email}
-
 `;
 
-    fs.writeFile("README.md", finalString, (err) =>
+    fs.writeFile("README_Sample.md", finalString, (err) =>
       err ? console.log(err) : console.log("Success!")
     );
   });
+
+function pickBadge(response) {
+  if (response.license === "MIT") {
+    badge =
+      "[![GitHub license](https://badgen.net/github/license/Naereen/Strapdown.js)](https://github.com/Naereen/StrapDown.js/blob/master/LICENSE)";
+  } else if (response.license === "Apache") {
+    badge =
+      "[![Npm package license](https://badgen.net/npm/llicense/discord.js)](https://npmjs.com/package/discord.js)";
+  } else {
+    badge =
+      "[![GPL license](https://img.shields.io/badge/License-GPL-blue.svg)](http://perso.crans.org/besson/LICENSE.html)";
+  }
+  return badge;
+}
